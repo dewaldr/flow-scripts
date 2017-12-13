@@ -4,7 +4,7 @@
 
 SOURCE_GLOB='/var/flows/edenrouter/*/*/ft-v05.*'
 HOSTNAME=$(hostname -f)
-REPORTTIME=$(/bin/date '+%Y-%m-%d %H:%M:%S' -d "yesterday")
+REPORTTIME=$(/bin/date '+%Y-%m-%d %H:%M:%S')
 YESTERDAY=$(/bin/date '+%Y-%m-%d' -d "yesterday")
 TODAY=$(/bin/date '+%Y-%m-%d')
 THISMONTH=$(/bin/date '+%Y-%m')
