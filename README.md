@@ -1,7 +1,7 @@
 # flow-scripts
 Basic scripts to generate daily network traffic reports using flow-tools
 
-##Goals
+## Goals
 
  - Summarize and report NetFlow data to facilitate exception management
  - Multiple report formats

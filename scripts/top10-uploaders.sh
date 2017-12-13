@@ -1,6 +1,6 @@
 #!/bin/dash
 
-# Report the top 10 internet uploaders: yesterday and month-to-date
+# Report the top 10 internet uploaders: yesterday, today and month
 
 SOURCE_GLOB='/home/sysop/flows/max/*/*/ft-v05.*'
 HOSTNAME=$(hostname -f)
@@ -33,7 +33,15 @@ echo "$HEADER2"
     | /usr/bin/awk "$AWK_SCRIPT" \
     | /usr/bin/head -10
 
-echo "\n\n\t---=(Top 10 uploaders: month-to-date [$THISMONTH])=---\n"
+echo "\t---=(Top 10 uploaders: today [$TODAY])=---\n"
+echo "$HEADER1"
+echo "$HEADER2"
+/usr/bin/flow-cat -t "$TODAY 00:00:00" -T "$TODAY 23:59:59" $SOURCE_GLOB \
+    | /usr/bin/flow-stat -f10 -S3 \
+    | /usr/bin/awk "$AWK_SCRIPT" \
+    | /usr/bin/head -10
+
+echo "\n\n\t---=(Top 10 uploaders: month [$THISMONTH])=---\n"
 echo "$HEADER1"
 echo "$HEADER2"
 /usr/bin/flow-cat -t "$FIRSTOFMTH" -T "$TODAY" $SOURCE_GLOB \

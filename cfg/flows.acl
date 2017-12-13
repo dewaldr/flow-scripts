@@ -1,0 +1,3 @@
+ip access-list standard apieskloof permit 192.168.11.0 0.0.0.255
+ip access-list standard isp permit 192.168.1.0 0.0.0.255
+ip access-list standard not_isp deny 192.168.1.0 0.0.0.255
