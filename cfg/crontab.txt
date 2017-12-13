@@ -1,0 +1,3 @@
+# NetFlow reporter crontab entries
+*/15 * * * * /usr/local/bin/top10-downloaders.sh  | /usr/bin/aha --black --title "Top 10 downloaders" > /tmp/top10-downloaders.html && mv /tmp/top10-downloaders.html /var/www/html/top10-downloaders.html
+*/15 * * * * /usr/local/bin/top10-uploaders.sh  | /usr/bin/aha --black --title "Top 10 uploaders" > /var/www/html/top10-uploaders.html > /tmp/top10-uploaders.html && mv /tmp/top10-uploaders.html /var/www/html/top10-uploaders.html
