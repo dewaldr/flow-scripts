@@ -13,17 +13,20 @@ HEADER1="IP Address\t\tHostname\t\t\t\t\tMBytes"
 HEADER2="==============\t\t=======================================\t\t======"
 
 AWK_SCRIPT='
-    {if ($2 ~ /^192\.168\.1\..+/)
-        ip_arr[$2]+=$4
+    {
+        if (($2 ~ /^192\.168\.1\..+/)  && ($1 !~ /^192\.168\.1\..+/)) {
+            ip_arr[$2]+=$4;
+       }
     } 
-    END { PROCINFO["sorted_in"] = "@val_num_desc"; 
-    for(ip in ip_arr) {
-        host_str=ip" ---"; 
-        "getent hosts " ip | getline host_str; 
-        split(host_str, host_arr, " "); 
-        printf "%-16s\t%-40s\t%dM\n", ip, host_arr[2], (ip_arr[ip]/(1048576))
-    }
-}'
+    END { 
+        PROCINFO["sorted_in"] = "@val_num_desc"; 
+        for(ip in ip_arr) {
+            host_str=ip" ---"; 
+            "getent hosts " ip | getline host_str; 
+            split(host_str, host_arr, " "); 
+            printf "%-16s\t%-40s\t%dM\n", ip, host_arr[2], (ip_arr[ip]/(1048576))
+        }
+    }'
 
 echo "\t---=(Top 10 downloaders: yesterday [$YESTERDAY])=---\n"
 echo "$HEADER1"
