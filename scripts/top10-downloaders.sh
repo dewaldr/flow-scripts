@@ -2,7 +2,7 @@
 
 # Report the top 10 internet downloaders: yesterday, today and month
 
-SOURCE_GLOB='/var/flows/edenrouter/*/*/ft-v05.*'
+SOURCE_GLOB='/var/flows/edenrouter/*/*/*/ft-v05.*'
 HOSTNAME=$(hostname -f)
 REPORTTIME=$(/bin/date '+%Y-%m-%d %H:%M:%S')
 YESTERDAY=$(/bin/date '+%Y-%m-%d' -d "yesterday")
