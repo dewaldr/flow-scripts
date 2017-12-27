@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flow Query</title>
+        <link rel="stylesheet" media="screen" href ="static/css/bootstrap.min.css">
+        <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <script src="static/js/jquery-3.2.1.min.js"</script>
+        <script src="static/js/bootstrap.min.js"</script>
+
+        <div class="container">
+            <h2>Flow Query</h2>
+            <form  class="form-horizontal" action="" method="post" role="form">
+                {{ form.csrf }}
+                 <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="start_date">Start date: </label>
+                    <input type="text" class="form-control" id="start_date" name="start_date" placeholder="Start date/time: yyyy-mm-dd HH:MM">
+                    <br>
+                    <label for="end_date">End date: </label>
+                    <input type="text" class="form-control" id="end_date" name="end_date" placeholder="End date/time: yyyy-mm-dd HH:MM">
+                </div>
+                <br>
+                <div class="form-group">
+                    <fieldset>
+                        <legend>Source IP</legend>
+                        <label for="src_ip4_re">Regular Expression: </label>
+                        <input type="text" class="form-control" id="src_ip4_re" name="src_ip4_re" placeholder="Source IPv4 address regex">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="invert_src_ip4" name="invert_src_ip4"> Invert Match</label>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                        <legend>Destination IP</legend>
+                        <label for="dst_ip4_re">Regular Expression: </label>
+                        <input type="text" class="form-control" id="dst_ip4_re" name="dst_ip4_re" placeholder="Destination IPv4 address regex">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="invert_dst_ip4" name="invert_dst_ip4"> Invert Match</label>
+                        </div>
+                    </fieldset>
+                </div>
+                <br>
+                <div class="form-group">
+                    <fieldset>
+                    <legend>Protocol</legend>
+                    {% for subfield in form.protocol %}
+                    {{ subfield }}
+                    {{ subfield.label }}
+                    {% endfor %}
+                    </fieldset>
+                </div>
+                <button type="submit" class="btn btn-primary">Query</button>
+                 </div>
+            </form>
+            <br>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+            <div class="alert alert-info"> <strong>Running query: </strong> {{ message[1] }} </div>
+            {% endif %}
+
+            {% if "Error" in message[1]: %}
+            <div class="alert alert-warning"> {{ message[1] }} </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+        </div>
+    </body>
+</html>

@@ -2,7 +2,11 @@
 
 # Report the top 10 internet downloaders: yesterday, today and month
 
+<<<<<<< Updated upstream
 SOURCE_GLOB='/var/flows/edenrouter/*/*/*/ft-v05.*'
+=======
+SOURCE_GLOB='/var/flows/max/*/*/*/ft-v05.*'
+>>>>>>> Stashed changes
 HOSTNAME=$(hostname -f)
 REPORTTIME=$(/bin/date '+%Y-%m-%d %H:%M:%S')
 YESTERDAY=$(/bin/date '+%Y-%m-%d' -d "yesterday")
@@ -14,7 +18,7 @@ HEADER2="==============\t\t=======================================\t\t======"
 
 AWK_SCRIPT='
     {
-        if (($2 ~ /^192\.168\.1\..+/)  && ($1 !~ /^192\.168\.1\..+/)) {
+        if (($2 ~ /^192\.168\.11\..+/) && ($1 !~ /^192\.168\.11\..+/) && ($1 !~ /^192\.168\.1\..+/)) {
             ip_arr[$2]+=$4;
        }
     } 
